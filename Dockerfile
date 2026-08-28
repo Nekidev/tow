@@ -12,5 +12,5 @@ RUN cargo build --release
 COPY src /app/src
 RUN cargo build --release
 
-ENTRYPOINT [ "/app/target/release/tow" ]
+ENTRYPOINT [ "/bin/sh" ]
 CMD [ "server" ]

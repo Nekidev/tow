@@ -5,12 +5,13 @@ use crate::args::{Args, Subcommand};
 
 mod args;
 mod client;
+mod proxy;
 mod server;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     dotenvy::dotenv().ok();
-    
+
     let args = Args::parse();
 
     match args.subcommand {

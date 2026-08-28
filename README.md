@@ -1,7 +1,7 @@
-# TOW - TCP over WebSockets
+# TOW - TCP (and UDP) over WebSockets
 
-`tow` is a tiny tunnel/proxy that sends TCP connections over WebSocket to bypass deep protocol'
-inspection restrictions in networks with allowed HTTPS.
+`tow` is a tiny tunnel/proxy that sends TCP and UDP connections over WebSocket to bypass deep
+protocol inspection restrictions in networks with allowed HTTPS.
 
 To install `tow`, use
 
@@ -14,7 +14,7 @@ cargo install tow
 On the server, start a proxy with `tow server`. It takes two arguments:
 
 - `--from` - The address to listen for incoming WebSocket connections at.
-- `--to` - The address to forward the incoming WebSocket connections as TCP to.
+- `--to` - The address to forward the incoming WebSocket connections as TCP/UDP to.
 
 For example,
 
@@ -24,8 +24,8 @@ tow server --from 0.0.0.0:80 --to 127.0.0.1:51820
 
 On the client, use `tow client` instead. It takes two arguments:
 
-- `--from` - The address to listen for incoming TCP connections at.
-- `--to` - The address or URL to forward the incoming TCP connections as WebSockets to.
+- `--from` - The address to listen for incoming TCP/UDP connections at.
+- `--to` - The address or URL to forward the incoming TCP/UDP connections as WebSockets to.
 
 For example,
 
