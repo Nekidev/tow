@@ -1,6 +1,6 @@
 use std::net::SocketAddr;
 
-/// A TCP over WebSockets proxy.
+/// A TCP (and UDP) over WebSockets proxy.
 #[derive(clap::Parser)]
 pub struct Args {
     #[clap(subcommand)]
@@ -9,9 +9,9 @@ pub struct Args {
 
 #[derive(clap::Subcommand)]
 pub enum Subcommand {
-    /// Listen for incoming websocket connections and forward them to a TCP address.
+    /// Listen for incoming websocket connections and forward them to a TCP (and UDP) address.
     Server(ServerArgs),
-    /// Connect to a websocket server and proxy incoming TCP connections through it.
+    /// Connect to a websocket server and proxy incoming TCP/UDP connections through it.
     Client(ClientArgs),
 }
 
