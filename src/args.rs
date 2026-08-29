@@ -33,4 +33,8 @@ pub struct ClientArgs {
     /// The address to forward the connections to.
     #[arg(env = "TOW_CLIENT_TO")]
     pub to: String,
+
+    /// When set, UDP tunnels will be closed after inactivity instead of on unbind.
+    #[arg(short, long, value_name = "MILLISECONDS", env = "TOW_CLIENT_TIMEOUT")]
+    pub timeout: Option<u64>,
 }

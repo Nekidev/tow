@@ -172,8 +172,8 @@ async fn handle_udp_connection(
 
     let (mut ws_tx, mut ws_rx) = stream.split();
 
-    let outgoing_task = proxy::udp_to_ws(connection.clone(), &mut ws_tx);
-    let incoming_task = proxy::ws_to_udp(&mut ws_rx, connection.clone(), peer_address);
+    let outgoing_task = proxy::udp_to_ws(connection.clone(), &mut ws_tx, || ());
+    let incoming_task = proxy::ws_to_udp(&mut ws_rx, connection.clone(), peer_address, || ());
 
     tokio::select! {
         result = outgoing_task => {

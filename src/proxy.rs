@@ -99,6 +99,7 @@ impl DatagramReader for Arc<UdpSocket> {
 pub async fn udp_to_ws<T, E>(
     mut udp: impl DatagramReader,
     ws: &mut WebSocketTx<T>,
+    on_message: impl Fn(),
 ) -> anyhow::Result<()>
 where
     T: AsyncWrite,
@@ -120,6 +121,8 @@ where
         ws.send(Message::Binary(bytes.into()))
             .await
             .context("Could not send UDP message to server.")?;
+
+        on_message();
     }
 
     Ok(())
@@ -129,6 +132,7 @@ pub async fn ws_to_udp<T, E, P>(
     ws: &mut WebSocketRx<T>,
     udp: Arc<UdpSocket>,
     peer_address: P,
+    on_message: impl Fn(),
 ) -> anyhow::Result<()>
 where
     T: AsyncWrite,
@@ -157,6 +161,8 @@ where
             }
             _ => {}
         };
+
+        on_message();
     }
 
     Ok(())
