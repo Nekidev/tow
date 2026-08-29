@@ -1,6 +1,6 @@
 [package]
 name = "tow"
-version = "0.2.2"
+version = "0.3.0"
 edition = "2024"
 license = "MIT"
 description = "A tiny TCP over WebSockets tunnel."
@@ -8,9 +8,14 @@ repository = "https://github.com/Nekidev/tow"
 
 [dependencies]
 anyhow = { version = "1.0.104", features = ["backtrace"] }
-axum = { version = "0.8.9", features = ["http2", "ws"] }
 clap = { version = "4.6.6", features = ["derive", "env", "wrap_help"] }
 dotenvy = "0.15.7"
+futures = "0.3.34"
 futures-util = { version = "0.3.34", features = ["io", "tokio-io"] }
-tokio = { version = "1.53.1", features = ["macros", "rt", "rt-multi-thread", "net"] }
+http = "1.5.0"
+networkrs = "0.1.4"
+papaya = "0.2.5"
+tokio = { version = "1.53.1", features = ["macros", "rt", "rt-multi-thread", "net", "sync", "time"] }
 tokio-tungstenite = { version = "0.30.0", features = ["rustls", "rustls-tls-webpki-roots"] }
+tracing = "0.1.44"
+tracing-subscriber = { version = "0.3.23", features = ["env-filter"] }

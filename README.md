@@ -33,6 +33,15 @@ For example,
 tow client 127.0.0.1:6767 wss://tow.example.com/
 ```
 
+## About Connections
+
+UDP does not have connections like TCP does, yet the websockets used to tunnel the data does. To
+emulate connections, `tow` queries the system's `sock_diag` to check when a UDP address stops being
+in use or its inode changes. When either of those does, the connection is closed.
+
+Connections get a stable IP:PORT pair to the server, though they're not the original IP due to
+tunnelling.
+
 ## License
 
 This project is available under the MIT license.

@@ -7,12 +7,25 @@ mod args;
 mod client;
 mod proxy;
 mod server;
+mod utils;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     dotenvy::dotenv().ok();
 
     let args = Args::parse();
+
+    #[cfg(debug_assertions)]
+    tracing_subscriber::fmt()
+        .with_target(false)
+        .with_env_filter("off,tow=trace")
+        .init();
+
+    #[cfg(not(debug_assertions))]
+    tracing_subscriber::fmt()
+        .with_target(false)
+        .with_env_filter("off,tow=info")
+        .init();
 
     match args.subcommand {
         Subcommand::Client(args) => client::run(args)
