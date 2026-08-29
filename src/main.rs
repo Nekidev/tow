@@ -15,6 +15,10 @@ async fn main() -> anyhow::Result<()> {
 
     let args = Args::parse();
 
+    rustls::crypto::aws_lc_rs::default_provider()
+        .install_default()
+        .unwrap();
+
     #[cfg(debug_assertions)]
     tracing_subscriber::fmt()
         .with_target(false)
