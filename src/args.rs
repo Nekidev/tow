@@ -3,6 +3,10 @@ use std::net::SocketAddr;
 /// A TCP (and UDP) over WebSockets proxy.
 #[derive(clap::Parser)]
 pub struct Args {
+    /// Log individual messages to the console.
+    #[arg(short, long)]
+    pub debug: bool,
+
     #[clap(subcommand)]
     pub subcommand: Subcommand,
 }

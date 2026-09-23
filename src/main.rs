@@ -19,17 +19,17 @@ async fn main() -> anyhow::Result<()> {
         .install_default()
         .unwrap();
 
-    #[cfg(debug_assertions)]
-    tracing_subscriber::fmt()
-        .with_target(false)
-        .with_env_filter("off,tow=trace")
-        .init();
-
-    #[cfg(not(debug_assertions))]
-    tracing_subscriber::fmt()
-        .with_target(false)
-        .with_env_filter("off,tow=info")
-        .init();
+    if args.debug {
+        tracing_subscriber::fmt()
+            .with_target(false)
+            .with_env_filter("off,tow=trace")
+            .init();
+    } else {
+        tracing_subscriber::fmt()
+            .with_target(false)
+            .with_env_filter("off,tow=info")
+            .init();
+    }
 
     match args.subcommand {
         Subcommand::Client(args) => client::run(args)

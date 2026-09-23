@@ -26,6 +26,10 @@ where
             .await
             .context("Could not read bytes from TCP connection.")?;
 
+        if bytes == 0 {
+            return Ok(());
+        }
+
         tracing::trace!(
             "TCP to WS: {:?}",
             String::from_utf8_lossy(&buffer[0..bytes])
