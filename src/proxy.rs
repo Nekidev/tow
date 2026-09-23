@@ -86,7 +86,7 @@ impl DatagramReader for mpsc::UnboundedReceiver<Vec<u8>> {
 
 impl DatagramReader for Arc<UdpSocket> {
     async fn read(&mut self) -> anyhow::Result<Vec<u8>> {
-        let mut buffer = [0u8; 2048];
+        let mut buffer = [0u8; u16::MAX as usize];
         let bytes = self
             .recv(&mut buffer)
             .await
