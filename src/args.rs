@@ -4,7 +4,7 @@ use std::net::SocketAddr;
 #[derive(clap::Parser)]
 pub struct Args {
     /// Log individual messages to the console.
-    #[arg(short, long)]
+    #[arg(short, long, env = "TOW_DEBUG")]
     pub debug: bool,
 
     #[clap(subcommand)]
